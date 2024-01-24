@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>나의 첫 웹사이트</title>
+    <style>
+        /* 여기에 CSS 스타일 추가 */
+        .accordion {
+            background-color: #eee;
+            color: #444;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+            transition: 0.4s;
+            border-bottom: 1px solid #ccc; /* 각 목록에 구분선 추가 */
+        
+        }
+
+        .active, .accordion:hover {
+            background-color: #ccc; 
+        }
+
+        .panel {
+            padding: 0 18px;
+            display: none;
+            background-color: #00FFFF; /* 진한 회색 배경색 설정 */
+            overflow: hidden;
+            border-bottom: 1px solid #ccc; /* 각 목록 아래에 구분선 추가 */
+            max-height: 0; /* 초기에는 패널을 숨기기 위해 높이를 0으로 설정합니다 */
+            transition: max-height 0.4s ease-in-out; /* 패널 높이의 변화를 부드럽게 애니메이션화 합니다 */
+        }
+        .active + .panel {
+    max-height: 1000px; /* 열린 패널의 높이를 설정합,니다 */
+}
+        
+        /* 목록 간 간격 조절 */
+        .accordion:first-child {
+            margin-top: 0; /* 첫 번째 목록의 위 간격을 0으로 설정 */
+        }
+    </style>
+</head>
+<body>
+    <h1>한끼의 정</h1>
+    <p>한인 요리 재료들을 공유하는 웹사이트입니다.</p>
+    <button onclick="displayMessage()">클릭해보세요</button>
+    
+    <input type="text" id="searchInput" placeholder="검색어 입력">
+    <button onclick="searchAndScroll()">검색</button>
+
+
+    <!-- 여기에 접히는 목록 추가 -->
+    <h2>음식별 재료</h2>
+    <button class="accordion">제육 볶음</button>
+    <div class="panel">
+      <p>돼지고기: 마이어 Shoulder </p>
+    </div>
+    <button class="accordion">김치 볶음밥</button>
+    <div class="panel">
+      <p>섹션 2 내용입니다.</p>
+    </div>
+    <button class="accordion">닭볶음탕</button>
+    <div class="panel">
+      <p>섹션 3 내용입니다.</p>
+    </div>
+    <button class="accordion">4</button>
+    <div class="panel">
+      <p>돼지고기: 마이어 Shoulder </p>
+    </div>
+    <button class="accordion">5</button>
+    <div class="panel">
+      <p>돼지고기: 마이어 Shoulder </p>
+    </div>
+    <button class="accordion">6</button>
+    <div class="panel">
+      <p>돼지고기: 마이어 Shoulder </p>
+    </div>
+    <button class="accordion">7</button>
+    <div class="panel">
+      <p>돼지고기: 마이어 Shoulder </p>
+    </div>
+        <button class="accordion">8</button>
+    <div class="panel">
+      <p>돼지고기: 마이어 Shoulder </p>
+    </div>
+        <button class="accordion">9</button>
+    <div class="panel">
+      <p>돼지고기: 마이어 Shoulder </p>
+    </div>
+        <button class="accordion">10</button>
+    <div class="panel">
+      <p>돼지고기: 마이어 Shoulder </p>
+    </div>
+        <button class="accordion">11</button>
+    <div class="panel">
+      <p>돼지고기: 마이어 Shoulder </p>
+    </div>
+
+    <script>
+        // 기존 JavaScript 함수
+        function displayMessage() {
+            alert("아직 준비되지 않았습니다");
+        }
+        
+        
+        
+        function searchAndScroll() {
+            var input = document.getElementById('searchInput');
+            var filter = input.value.toUpperCase();
+
+            if (filter) {
+                var buttons = document.getElementsByClassName("accordion");
+
+                for (var i = 0; i < buttons.length; i++) {
+                    var button = buttons[i];
+                    var scrollIndex = button.getAttribute("data-scroll");
+
+                    if (button.textContent.toUpperCase().indexOf(filter) >= 0) {
+                        var panel = button.nextElementSibling;
+
+                        if (panel.style.display !== "block") {
+                            panel.style.display = "block";
+                            // 해당 버튼의 위치로 스크롤
+                            button.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            alert("검색어 '" + input.value + "'를 찾았습니다!");
+                        }
+                    } else {
+                        // 검색 결과에 해당하지 않는 버튼은 숨김 처리
+                        var panel = button.nextElementSibling;
+                        panel.style.display = "none";
+                    }
+                }
+            }
+        }
+        
+        // 접히는 목록을 위한 JavaScript
+        function togglePanel(panelNumber) {
+            var panelId = "panel" + panelNumber;
+            var panel = document.getElementById(panelId);
+            
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+            } else {
+                panel.style.display = "block";
+            }
+        }
+
+    
+        
+        // 접히는 목록을 위한 JavaScript
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+          acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+              panel.style.display = "none";
+            } else {
+              panel.style.display = "block";
+            }
+          });
+        }
+    </script>
+</body>
+</html>
